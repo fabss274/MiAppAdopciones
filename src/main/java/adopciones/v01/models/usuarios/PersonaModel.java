@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "PerfilPersona")
+@Table(name = "Perfilpersona")
 @Data
 public class PersonaModel {
 
