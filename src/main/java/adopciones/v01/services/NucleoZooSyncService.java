@@ -41,7 +41,7 @@ public class NucleoZooSyncService {
         );
         log.info("codigo existente en la bd: {}", codigosExistentes.size());
 
-        NucleoZooApiResponseDTO response ;
+        NucleoZooApiResponseDTO response = null;
 
         do {
             try {
