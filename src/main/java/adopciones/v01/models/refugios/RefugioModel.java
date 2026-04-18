@@ -4,11 +4,13 @@ import adopciones.v01.models.animales.AnimalitoModel;
 import adopciones.v01.models.formularios.FormularioModel;
 import adopciones.v01.models.usuarios.UsuarioModel;
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
+@Data
 @Table(name = "PerfilRefugio")
 public class RefugioModel {
 
@@ -64,97 +66,4 @@ public class RefugioModel {
         this.formularios = formularios;
     }
 
-    public RefugioModel() {
-    }
-
-
-    // getters y setters
-
-    public List<FormularioModel> getFormularios() {
-        return formularios;
-    }
-
-    public void setFormularios(List<FormularioModel> formularios) {
-        this.formularios = formularios;
-    }
-
-    public List<AnimalitoModel> getAnimales() {
-        return animales;
-    }
-
-    public void setAnimales(List<AnimalitoModel> animales) {
-        this.animales = animales;
-    }
-
-    public LocalDateTime getUpdated_at() {
-        return updated_at;
-    }
-
-    public void setUpdated_at(LocalDateTime updated_at) {
-        this.updated_at = updated_at;
-    }
-
-    public LocalDateTime getCreated_at() {
-        return created_at;
-    }
-
-    public void setCreated_at(LocalDateTime created_at) {
-        this.created_at = created_at;
-    }
-
-    public boolean isVerificado() {
-        return verificado;
-    }
-
-    public void setVerificado(boolean verificado) {
-        this.verificado = verificado;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public String getNucleo_zoologico() {
-        return nucleo_zoologico;
-    }
-
-    public void setNucleo_zoologico(String nucleo_zoologico) {
-        this.nucleo_zoologico = nucleo_zoologico;
-    }
-
-    public String getNombre_refugio() {
-        return nombre_refugio;
-    }
-
-    public void setNombre_refugio(String nombre_refugio) {
-        this.nombre_refugio = nombre_refugio;
-    }
-
-    public UsuarioModel getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(UsuarioModel usuario) {
-        this.usuario = usuario;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 }
