@@ -2,7 +2,6 @@ package adopciones.v01.controllers;
 
 import adopciones.v01.dto.perfilpersona.PerfilPersonaDTO;
 import adopciones.v01.services.usuarios.PersonaService;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
