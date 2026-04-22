@@ -17,6 +17,7 @@ public class UsuarioController {
 
     private final UsuarioService usuarioService;
 
+    // ***************** CRUD
     @GetMapping
     public List<UsuarioRespuestaDTO> getUsers() {
         return usuarioService.listarUsuarios();
@@ -40,6 +41,8 @@ public class UsuarioController {
         }
         return ResponseEntity.notFound().build();
     }
+
+    // ***************** BUSQUEDAS
 
     @GetMapping("/{id}")
     public ResponseEntity<UsuarioRespuestaDTO> buscarUsuarioPorId(@PathVariable long id) {

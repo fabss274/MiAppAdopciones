@@ -53,7 +53,7 @@ public class AnimalitoController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Animal no encontrado (id: " + id + ")");
     }
 
-    // ***************** BÚSQUEDAS
+    // ***************** BUSQUEDAS
 
     @GetMapping("/{id}")
     public ResponseEntity<?> buscarPorId(@PathVariable Long id) {

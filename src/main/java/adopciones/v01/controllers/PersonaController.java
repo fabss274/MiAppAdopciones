@@ -17,11 +17,11 @@ public class PersonaController {
 
     private final PersonaService personaService;
 
+    // ***************** CRUD
     @GetMapping
     public List<PerfilPersonaDTO> getPersonas() {
         return personaService.listarPersonas();
     }
-
 
 
     @PostMapping
@@ -42,6 +42,7 @@ public class PersonaController {
         return ResponseEntity.notFound().build();
     }
 
+    // ***************** BUSQUEDAS
     @GetMapping("/{id}")
     public ResponseEntity<PerfilPersonaDTO> buscarPersonaPorId(@PathVariable Long id) {
         return personaService.buscarPorId(id)

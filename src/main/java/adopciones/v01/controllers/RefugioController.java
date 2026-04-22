@@ -16,13 +16,12 @@ public class RefugioController {
 
     private final RefugioService refugioService;
 
-    // --- LISTAR TODOS LOS REFUGIOS ---
+    // ***************** CRUD
     @GetMapping
     public List<RefugioDTO> getRefugios() {
         return refugioService.listarRefugios();
     }
 
-    // --- CREAR UN NUEVO REFUGIO ---
     @PostMapping
     public ResponseEntity<RefugioDTO> saveRefugio(@RequestBody RefugioDTO refugioDTO) {
         try {
@@ -32,7 +31,6 @@ public class RefugioController {
         }
     }
 
-    // --- EDITAR REFUGIO POR ID ---
     @PutMapping("/{id}")
     public ResponseEntity<RefugioDTO> editRefugio(@PathVariable Long id, @RequestBody RefugioDTO refugioDTO) {
         try {
@@ -42,7 +40,6 @@ public class RefugioController {
         }
     }
 
-    // --- ELIMINAR REFUGIO ---
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteRefugio(@PathVariable Long id) {
         if (refugioService.eliminarRefugio(id)) {
@@ -50,7 +47,9 @@ public class RefugioController {
         }
         return ResponseEntity.notFound().build();
     }
-    // --- BUSCAR POR REFUGIO ----
+
+
+    // ***************** BUSQUEDAS
     @GetMapping("/{id}")
     public ResponseEntity<RefugioDTO> buscarPorId(@PathVariable Long id) {
         return refugioService.listarRefugios().stream()
