@@ -29,6 +29,7 @@ public class PersonaService {
 
 
     //*****************CRUD
+    // LISTAR
     @Transactional(readOnly = true)
     public List<PerfilPersonaDTO> listarPersonas() {
         return personaRepo.findAll()
@@ -37,6 +38,7 @@ public class PersonaService {
                 .collect(Collectors.toList());
     }
 
+    // CREAR
     @Transactional
     public PerfilPersonaDTO crearPerfilPersona(PerfilPersonaDTO personaDTO) {
         if (personaRepo.existsByDni(personaDTO.getDni())) {
@@ -55,6 +57,7 @@ public class PersonaService {
         return mapper.toPerfilPersonaDTO(guardado);
     }
 
+    // EDITAR
     @Transactional
     public PerfilPersonaDTO editarPerfilPersona(Long id, PerfilPersonaDTO personaDTO) {
         PersonaModel personaAEditar = personaRepo.findById(id)
@@ -76,6 +79,7 @@ public class PersonaService {
         return mapper.toPerfilPersonaDTO(editado);
     }
 
+    // ELIMINAR
     @Transactional
     public boolean eliminarPerfilPersona(Long id) {
         if (!personaRepo.existsById(id)) {

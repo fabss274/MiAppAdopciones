@@ -96,7 +96,7 @@ public class AnimalitosService {
         return true;
     }
 
-    // ***************** BÚSQUEDAS
+    // ***************** BUSQUEDAS
 
     @Transactional(readOnly = true)
     public Optional<AnimalitoDTO> buscarPorId(Long id) {

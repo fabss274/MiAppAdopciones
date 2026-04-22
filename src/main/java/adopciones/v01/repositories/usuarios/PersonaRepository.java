@@ -19,5 +19,5 @@ public interface PersonaRepository extends JpaRepository<PersonaModel, Long> {
     List<PersonaModel> findByCodpostal(String codPostal);
     List<PersonaModel> findByLocalidad(String localidad);
 
-    //posible ampliacion a provincias
+    //posible ampliacion a busqueda por provincias (lejano)
 }
