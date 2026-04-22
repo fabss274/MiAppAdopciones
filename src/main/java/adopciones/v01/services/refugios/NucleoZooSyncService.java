@@ -1,4 +1,4 @@
-package adopciones.v01.services;
+package adopciones.v01.services.refugios;
 
 import adopciones.v01.dto.refugios.NucleoZooApiResponseDTO;
 import adopciones.v01.dto.refugios.NucleoZooRecordDTO;

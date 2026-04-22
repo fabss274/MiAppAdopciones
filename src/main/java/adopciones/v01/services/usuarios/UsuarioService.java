@@ -116,7 +116,7 @@ public class UsuarioService {
     }
 
 
-    // ------- TRADUCTORES
+    // ------- MAPPEOS
 
     // conversión modelo a DTO respuestsa
     private UsuarioRespuestaDTO convertirARespuestaDTO(UsuarioModel model) {
