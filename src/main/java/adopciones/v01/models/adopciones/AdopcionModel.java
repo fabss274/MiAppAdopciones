@@ -5,11 +5,17 @@ import adopciones.v01.models.animales.AnimalitoModel;
 import adopciones.v01.models.formularios.RespuestaModel;
 import adopciones.v01.models.usuarios.UsuarioModel;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "Adopciones")
 public class AdopcionModel {
 
@@ -44,94 +50,4 @@ public class AdopcionModel {
     @OneToMany(mappedBy = "adopcion")
     private List<RespuestaModel> respuestas;
 
-
-    //constructores
-    public AdopcionModel(Long id, AnimalitoModel animal, UsuarioModel usuario, estadoAdopcion estadoAdopcion, String motivo_rechazo, LocalDateTime created_at, LocalDateTime updated_at, List<SeguimientoModel> seguimientos, List<RespuestaModel> respuestas) {
-        this.id = id;
-        this.animal = animal;
-        this.usuario = usuario;
-        this.estadoAdopcion = estadoAdopcion;
-        this.motivo_rechazo = motivo_rechazo;
-        this.created_at = created_at;
-        this.updated_at = updated_at;
-        this.seguimientos = seguimientos;
-        this.respuestas = respuestas;
-    }
-    public AdopcionModel() {}
-
-
-    // getters y setters
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public AnimalitoModel getAnimal() {
-        return animal;
-    }
-
-    public void setAnimal(AnimalitoModel animal) {
-        this.animal = animal;
-    }
-
-    public UsuarioModel getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(UsuarioModel usuario) {
-        this.usuario = usuario;
-    }
-
-    public estadoAdopcion getEstadoAdopcion() {
-        return estadoAdopcion;
-    }
-
-    public void setEstadoAdopcion(estadoAdopcion estadoAdopcion) {
-        this.estadoAdopcion = estadoAdopcion;
-    }
-
-    public String getMotivo_rechazo() {
-        return motivo_rechazo;
-    }
-
-    public void setMotivo_rechazo(String motivo_rechazo) {
-        this.motivo_rechazo = motivo_rechazo;
-    }
-
-    public LocalDateTime getCreated_at() {
-        return created_at;
-    }
-
-    public void setCreated_at(LocalDateTime created_at) {
-        this.created_at = created_at;
-    }
-
-    public LocalDateTime getUpdated_at() {
-        return updated_at;
-    }
-
-    public void setUpdated_at(LocalDateTime updated_at) {
-        this.updated_at = updated_at;
-    }
-
-    public List<SeguimientoModel> getSeguimientos() {
-        return seguimientos;
-    }
-
-    public void setSeguimientos(List<SeguimientoModel> seguimientos) {
-        this.seguimientos = seguimientos;
-    }
-
-    public List<RespuestaModel> getRespuestas() {
-        return respuestas;
-    }
-
-    public void setRespuestas(List<RespuestaModel> respuestas) {
-        this.respuestas = respuestas;
-    }
 }
