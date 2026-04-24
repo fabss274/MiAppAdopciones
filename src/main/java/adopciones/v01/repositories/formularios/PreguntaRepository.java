@@ -13,7 +13,6 @@ import java.util.List;
 @Repository
 public interface PreguntaRepository extends JpaRepository<PreguntaModel, Long> {
 
-    List<PreguntaModel> findByFormulario(FormularioModel formulario);
     List<PreguntaModel> findByFormularioOrderByOrdenAsc(FormularioModel formulario);
     List<PreguntaModel> findByFormularioAndObligatoria(FormularioModel formulario, boolean obligatoria);
     List<PreguntaModel> findByTipoSintaxisPregunta(tipoSintaxisPregunta tipo);

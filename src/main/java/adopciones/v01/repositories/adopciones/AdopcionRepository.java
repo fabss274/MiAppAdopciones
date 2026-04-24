@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface AdopcionRepository extends JpaRepository<AdopcionModel, Long> {
@@ -17,14 +16,10 @@ public interface AdopcionRepository extends JpaRepository<AdopcionModel, Long> {
     List<AdopcionModel> findByEstadoAdopcion(estadoAdopcion estado);
 
     List<AdopcionModel> findByUsuarioAndEstadoAdopcion(UsuarioModel usuario, estadoAdopcion estado);
-    List<AdopcionModel> findByAnimalAndEstadoAdopcion(AnimalitoModel animal, estadoAdopcion estado);
 
     // Validar solicitud activa duplicada (no RECHAZADA) para mismo usuario+animal
     boolean existsByUsuarioAndAnimalAndEstadoAdopcionNot(
             UsuarioModel usuario, AnimalitoModel animal, estadoAdopcion estado
     );
 
-    Optional<AdopcionModel> findTopByAnimalAndEstadoAdopcionOrderByCreatedAtDesc(
-            AnimalitoModel animal, estadoAdopcion estado
-    );
 }
