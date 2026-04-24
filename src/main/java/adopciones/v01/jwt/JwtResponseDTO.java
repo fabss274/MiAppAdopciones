@@ -1,4 +1,4 @@
-package adopciones.v01.dto;
+package adopciones.v01.jwt;
 
 import lombok.Data;
 

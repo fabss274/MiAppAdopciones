@@ -1,4 +1,4 @@
-package adopciones.v01.Config;
+package adopciones.v01.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -8,7 +8,6 @@ public class UsuarioRespuestaDTO {
 
     private Long id;
     private String email;
-    private String contrasena;
     private String rol;
     private boolean activo;
 }
