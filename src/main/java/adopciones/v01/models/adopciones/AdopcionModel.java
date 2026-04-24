@@ -36,13 +36,13 @@ public class AdopcionModel {
     private estadoAdopcion estadoAdopcion;
 
     @Column(name = "motivo_rechazo", columnDefinition = "TEXT")
-    private String motivo_rechazo;
+    private String motivoRechazo;
 
     @Column(name = "created_at")
-    private LocalDateTime created_at;
+    private LocalDateTime createdAt;
 
     @Column(name = "updated_at")
-    private LocalDateTime updated_at;
+    private LocalDateTime updatedAt;
 
     @OneToMany(mappedBy = "adopcion")
     private List<SeguimientoModel> seguimientos;
