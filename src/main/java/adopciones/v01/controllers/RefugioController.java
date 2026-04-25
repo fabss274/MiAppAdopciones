@@ -59,6 +59,12 @@ public class RefugioController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    //buscar por refugio verificado
+    @GetMapping("/verificados")
+    public ResponseEntity<List<RefugioDTO>> getRefugiosVerificados() {
+        return ResponseEntity.ok(refugioService.listarRefugiosVerificados());
+    }
+
 //    @GetMapping("/nucleo/{nucleo}")
 //    public ResponseEntity<RefugioDTO> buscarPorNucleo(@PathVariable String nucleo) {
 //        return refugioService.buscarPorNucleoZoologico(nucleo)

@@ -31,7 +31,7 @@ public class JwtService {
     private String getToken(Map<String, Object> extraClaims, UserDetails user) {
         return Jwts.builder()
                 .setClaims(extraClaims)
-                .setSubject(user.getUsername()) // en UsuarioModel, getUsername() devuelve email
+                .setSubject(user.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + jwtExpiration))
                 .signWith(getKey(), SignatureAlgorithm.HS256)

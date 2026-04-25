@@ -75,6 +75,15 @@ public class RefugioService {
         return true;
     }
 
+    // buscar por refugio verificado
+    @Transactional(readOnly = true)
+    public List<RefugioDTO> listarRefugiosVerificados() {
+        return refugioRepo.findByVerificadoTrue()
+                .stream()
+                .map(this::convertirARefugioDTO)
+                .collect(Collectors.toList());
+    }
+
     // BUSCAR POR N.ZOOLOGICO
 //    @Transactional(readOnly = true)
 //    public Optional<RefugioDTO> buscarPorNucleoZoologico(String nucleoZoologico) {

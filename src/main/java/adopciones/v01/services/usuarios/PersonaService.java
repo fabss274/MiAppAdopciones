@@ -1,7 +1,8 @@
 package adopciones.v01.services.usuarios;
 
 import adopciones.v01.dto.perfilpersona.PerfilPersonaDTO;
-import adopciones.v01.dto.perfilpersona.PerfilPersonaMapper;
+import adopciones.v01.dto.perfilpersona.PerfilPersonaDireccionDTO;
+import adopciones.v01.dto.perfilpersona.PerfilPersonaImportanteDTO;
 import adopciones.v01.models.usuarios.PersonaModel;
 import adopciones.v01.models.usuarios.UsuarioModel;
 import adopciones.v01.repositories.usuarios.PersonaRepository;
@@ -22,16 +23,16 @@ public class PersonaService {
 
     private final PersonaRepository personaRepo;
     private final UsuarioRepository usuarioRepo;
-    private final PerfilPersonaMapper mapper;
 
 
     //*****************CRUD
+
     // LISTAR
     @Transactional(readOnly = true)
     public List<PerfilPersonaDTO> listarPersonas() {
         return personaRepo.findAll()
                 .stream()
-                .map(mapper::toPerfilPersonaDTO)
+                .map(this::toPerfilPersonaDTO)
                 .collect(Collectors.toList());
     }
 
@@ -47,11 +48,11 @@ public class PersonaService {
         UsuarioModel usuario = usuarioRepo.findById(personaDTO.getId())
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
-        PersonaModel nuevoPerfil = mapper.toPersonaModel(personaDTO);
+        PersonaModel nuevoPerfil = toPersonaModel(personaDTO);
         nuevoPerfil.setUsuario(usuario);
         PersonaModel guardado = personaRepo.save(nuevoPerfil);
 
-        return mapper.toPerfilPersonaDTO(guardado);
+        return toPerfilPersonaDTO(guardado);
     }
 
     // EDITAR
@@ -73,7 +74,7 @@ public class PersonaService {
         actualizarPersonaDesdeDTO(personaAEditar, personaDTO);
 
         PersonaModel editado = personaRepo.save(personaAEditar);
-        return mapper.toPerfilPersonaDTO(editado);
+        return toPerfilPersonaDTO(editado);
     }
 
     // ELIMINAR
@@ -86,30 +87,32 @@ public class PersonaService {
         return true;
     }
 
+
     //*****************BUSQUEDAS
+
     @Transactional(readOnly = true)
     public Optional<PerfilPersonaDTO> buscarPorId(Long id) {
         return personaRepo.findById(id)
-                .map(mapper::toPerfilPersonaDTO);
+                .map(this::toPerfilPersonaDTO);
     }
 
     @Transactional(readOnly = true)
     public Optional<PerfilPersonaDTO> buscarPorDni(String dni) {
         return personaRepo.findByDni(dni)
-                .map(mapper::toPerfilPersonaDTO);
+                .map(this::toPerfilPersonaDTO);
     }
 
     @Transactional(readOnly = true)
     public Optional<PerfilPersonaDTO> buscarPorTelefono(String telefono) {
         return personaRepo.findByTelefono(telefono)
-                .map(mapper::toPerfilPersonaDTO);
+                .map(this::toPerfilPersonaDTO);
     }
 
     @Transactional(readOnly = true)
     public List<PerfilPersonaDTO> buscarPorCodPostal(String codPostal) {
         return personaRepo.findByCodpostal(codPostal)
                 .stream()
-                .map(mapper::toPerfilPersonaDTO)
+                .map(this::toPerfilPersonaDTO)
                 .collect(Collectors.toList());
     }
 
@@ -117,11 +120,63 @@ public class PersonaService {
     public List<PerfilPersonaDTO> buscarPorLocalidad(String localidad) {
         return personaRepo.findByLocalidad(localidad)
                 .stream()
-                .map(mapper::toPerfilPersonaDTO)
+                .map(this::toPerfilPersonaDTO)
                 .collect(Collectors.toList());
     }
 
-    //*****************TRADUCTOR
+
+    //*****************MAPPEOS
+
+    private PerfilPersonaDTO toPerfilPersonaDTO(PersonaModel persona) {
+        if (persona == null) return null;
+
+        PerfilPersonaDireccionDTO direccion = new PerfilPersonaDireccionDTO();
+        direccion.setDireccion(persona.getDireccion());
+        direccion.setLocalidad(persona.getLocalidad());
+        direccion.setProvincia(persona.getProvincia());
+        direccion.setCodPostal(persona.getCodpostal());
+
+        PerfilPersonaDTO dto = new PerfilPersonaDTO();
+        dto.setIdUsuario(persona.getUsuario() != null ? persona.getUsuario().getId() : null);
+        dto.setDni(persona.getDni());
+        dto.setNombre(persona.getNombre());
+        dto.setApellidos(persona.getApellidos());
+        dto.setTelefono(persona.getTelefono());
+        dto.setFechaNacimiento(persona.getFechaNacimiento());
+        dto.setDireccionCompleta(direccion);
+
+        return dto;
+    }
+
+//    private PerfilPersonaImportanteDTO toPerfilPersonaImportanteDTO(PersonaModel persona) {
+//        if (persona == null) return null;
+//
+//        PerfilPersonaImportanteDTO dto = new PerfilPersonaImportanteDTO();
+//        dto.setIdUsuario(persona.getUsuario() != null ? persona.getUsuario().getId() : null);
+//        dto.setFechaNacimiento(persona.getFechaNacimiento());
+//
+//        return dto;
+//    }
+
+    private PersonaModel toPersonaModel(PerfilPersonaDTO dto) {
+        if (dto == null) return null;
+
+        PersonaModel model = new PersonaModel();
+        model.setDni(dto.getDni());
+        model.setNombre(dto.getNombre());
+        model.setApellidos(dto.getApellidos());
+        model.setTelefono(dto.getTelefono());
+        model.setFechaNacimiento(dto.getFechaNacimiento());
+
+        if (dto.getDireccionCompleta() != null) {
+            model.setDireccion(dto.getDireccionCompleta().getDireccion());
+            model.setLocalidad(dto.getDireccionCompleta().getLocalidad());
+            model.setProvincia(dto.getDireccionCompleta().getProvincia());
+            model.setCodpostal(dto.getDireccionCompleta().getCodPostal());
+        }
+
+        return model;
+    }
 
     private void actualizarPersonaDesdeDTO(PersonaModel persona, PerfilPersonaDTO dto) {
         persona.setNombre(dto.getNombre());
@@ -129,13 +184,11 @@ public class PersonaService {
         persona.setTelefono(dto.getTelefono());
         persona.setFechaNacimiento(dto.getFechaNacimiento());
 
-        // Dirección anidada
         if (dto.getDireccionCompleta() != null) {
             persona.setDireccion(dto.getDireccionCompleta().getDireccion());
             persona.setLocalidad(dto.getDireccionCompleta().getLocalidad());
             persona.setProvincia(dto.getDireccionCompleta().getProvincia());
             persona.setCodpostal(dto.getDireccionCompleta().getCodPostal());
         }
-
     }
 }
