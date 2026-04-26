@@ -146,7 +146,7 @@ public class AdopcionService {
                 .collect(Collectors.toList());
     }
 
-    // ***************** VALIDACION ESTADO (máquina de estados)
+    // ***************** VALIDACION ESTADO
 
     private void validarTransicionEstado(estadoAdopcion actual, estadoAdopcion nuevo) {
         boolean valida = switch (actual) {

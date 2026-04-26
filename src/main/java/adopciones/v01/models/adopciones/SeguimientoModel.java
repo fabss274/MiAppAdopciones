@@ -30,9 +30,12 @@ public class SeguimientoModel {
     private String descripcion;
 
     @Column(name = "created_at")
-    private LocalDateTime created_at;
+    private LocalDateTime createdAt;
 
     @OneToMany(mappedBy = "seguimiento")
     private List<FotoSeguimientoModel> fotos;
+
+    @Column(name = "notificacion_enviada")
+    private boolean notificacionEnviada = false;
 
 }
