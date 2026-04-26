@@ -31,7 +31,7 @@ public class MensajeModel {
     private String contenido;
 
     @Column(name = "fecha_envio")
-    private LocalDateTime fecha_envio;
+    private LocalDateTime fechaEnvio;
 
     @Column(name = "leido")
     private boolean leido;
