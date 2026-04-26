@@ -1,6 +1,6 @@
 package adopciones.v01.models.comunicacion;
 
-import adopciones.v01.enums.tipo_solicitud_chat;
+import adopciones.v01.enums.tipoSolicitudChat;
 import adopciones.v01.models.adopciones.AcogidaModel;
 import adopciones.v01.models.adopciones.AdopcionModel;
 import adopciones.v01.models.animales.AnimalitoModel;
@@ -39,7 +39,7 @@ public class ChatModel {
 
     @Column(name = "tipo_solicitud_chat", nullable = false)
     @Enumerated(value = EnumType.STRING)
-    private tipo_solicitud_chat tipo_solicitud_chat;
+    private tipoSolicitudChat tipoSolicitudChat;
 
     @ManyToOne
     @JoinColumn(name = "adopcion_id")
@@ -50,7 +50,7 @@ public class ChatModel {
     private AcogidaModel acogida;
 
     @Column(name = "created_at")
-    private LocalDateTime created_at;
+    private LocalDateTime createdAt;
 
     @OneToMany(mappedBy = "chat")
     private List<MensajeModel> mensajes;
